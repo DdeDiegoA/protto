@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PostToolUse": [{
+      "matcher": "Edit|Write",
+      "hooks": [{
+        "type": "command",
+        "command": "bash -n protto && bash -n lib/*.sh",
+        "timeout": 15
+      }]
+    }],
+    "Stop": [{
+      "hooks": [{
+        "type": "command",
+        "command": "./tests/test.bash",
+        "timeout": 120
+      }]
+    }]
+  }
+}

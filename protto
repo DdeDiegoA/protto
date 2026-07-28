@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# protto — agent-friendly project setup
+# ponytail: thin orchestrator. Logic lives in lib/.
+
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+source "$ROOT/lib/paths.sh"
+source "$ROOT/lib/utils.sh"
+source "$ROOT/lib/detect.sh"
+source "$ROOT/lib/graphify.sh"
+source "$ROOT/lib/skills.sh"
+source "$ROOT/lib/generators.sh"
+
+FORCE=0
+
+parse_args() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --force) FORCE=1 ;;
+      -h|--help) usage; exit 0 ;;
+      *) break ;;
+    esac
+    shift
+  done
+}
+
+cmd_init() {
+  parse_args "$@"
+  echo "[protto] init in $(pwd)"
+  [[ -d ".git" ]] || echo "  warning: not a git repository"
+
+  if [[ -f "CLAUDE.md" || -f "AGENTS.md" ]]; then
+    if [[ $FORCE -eq 0 ]]; then
+      echo "  existing boot files found. Use --force to overwrite."
+      exit 1
+    fi
+  fi
+
+  backup_if_exists CLAUDE.md
+  backup_if_exists AGENTS.md
+
+  gen_dirs
+  gen_claude_md
+  gen_agents_md
+  gen_settings_json
+  gen_docs
+  gen_skills_md
+  ensure_gitignore
+
+  # ponytail: print skill-aware next steps instead of generic tips
+  echo "[protto] done."
+  local skills
+  skills=$(collect_skills)
+  if [[ -n "$skills" ]]; then
+    echo ""
+    echo "[protto] Suggested next steps:"
+    while IFS= read -r name; do
+      local sug
+      sug=$(skill_suggestion "$name" 2>/dev/null) && echo "  → [$name] $sug"
+    done <<< "$skills"
+  fi
+  echo "  Run \`protto analyze\` to import graphify output or bootstrap it."
+  echo "  El agente leerá CLAUDE.md con estas sugerencias al iniciar sesión."
+}
+
+cmd_list_skills() {
+  list_skills
+}
+
+cmd_analyze() {
+  run_analyze
+}
+
+main() {
+  case "${1:-help}" in
+    init) shift; cmd_init "$@" ;;
+    list-skills) cmd_list_skills ;;
+    analyze) shift; cmd_analyze "$@" ;;
+    help|--help|-h) usage ;;
+    *) usage; exit 1 ;;
+  esac
+}
+
+main "$@"

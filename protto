@@ -10,6 +10,7 @@ source "$ROOT/lib/utils.sh"
 source "$ROOT/lib/detect.sh"
 source "$ROOT/lib/graphify.sh"
 source "$ROOT/lib/skills.sh"
+source "$ROOT/lib/templates.sh"
 source "$ROOT/lib/generators.sh"
 
 FORCE=0
@@ -45,6 +46,7 @@ cmd_init() {
   gen_agents_md
   gen_settings_json
   gen_docs
+  gen_contextual_content
   gen_skills_md
   ensure_gitignore
 

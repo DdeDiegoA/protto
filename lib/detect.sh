@@ -24,7 +24,7 @@ detect_build_command() {
     # bash CLI project like protto itself
     echo "bash -n protto && bash -n lib/*.sh"
   else
-    echo "echo \"TODO: add build command\""
+    echo "echo 'TODO: add build command'"
   fi
 }
 
@@ -43,18 +43,18 @@ detect_test_command() {
   elif [[ -f "tests/test.bash" ]]; then
     echo "./tests/test.bash"
   else
-    echo "echo \"TODO: add test command\""
+    echo "echo 'TODO: add test command'"
   fi
 }
 
 # Detect lint command.
 detect_lint_command() {
   if [[ -f "package.json" ]]; then
-    if grep -q '"lint"' package.json; then echo "npm run lint"; else echo "echo \"TODO: add lint command\""; fi
+    if grep -q '"lint"' package.json; then echo "npm run lint"; else echo "echo 'TODO: add lint command'"; fi
   elif [[ -f "pyproject.toml" ]]; then
     echo "ruff check ."
   else
-    echo "echo \"TODO: add lint command\""
+    echo "echo 'TODO: add lint command'"
   fi
 }
 
@@ -63,7 +63,18 @@ detect_typecheck_command() {
   if [[ -f "tsconfig.json" ]]; then echo "npx tsc --noEmit"
   elif [[ -f "Cargo.toml" ]]; then echo "cargo check"
   elif [[ -f "pyproject.toml" ]] && grep -q "mypy" pyproject.toml; then echo "mypy ."
-  else echo "echo \"TODO: add typecheck command\""
+  else echo "echo 'TODO: add typecheck command'"
+  fi
+}
+
+# Human-readable stack name for templates.
+detect_stack_name() {
+  if [[ -f "package.json" ]]; then echo "node"
+  elif [[ -f "Cargo.toml" ]]; then echo "rust"
+  elif [[ -f "pyproject.toml" ]] || [[ -f "setup.py" ]]; then echo "python"
+  elif [[ -f "go.mod" ]]; then echo "go"
+  elif [[ -f "Makefile" ]]; then echo "make"
+  else echo "bash"
   fi
 }
 

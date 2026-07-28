@@ -121,13 +121,15 @@ gen_docs() {
   else
     ctx="No graphify detected. Install graphify or run \`protto analyze\` to bootstrap."
   fi
-  cat > docs/architecture.md <<EOF
+
+  # Only create stubs if the files don't exist yet.
+  [[ -f docs/architecture.md ]] || cat > docs/architecture.md <<EOF
 # Architecture
 > Start with one paragraph. Link to deeper files instead of copying.
 
 $ctx
 EOF
-  cat > docs/context.md <<EOF
+  [[ -f docs/context.md ]] || cat > docs/context.md <<EOF
 # Context
 > Current phase, latest decisions, and next steps. Keep it short.
 

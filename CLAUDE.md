@@ -4,8 +4,8 @@
 ## Build & Test
 - Build: `bash -n protto && bash -n lib/*.sh`
 - Test: `./tests/test.bash`
-- Lint: `echo "TODO: add lint command"`
-- Typecheck: `echo "TODO: add typecheck command"`
+- Lint: `echo 'TODO: add lint command'`
+- Typecheck: `echo 'TODO: add typecheck command'`
 
 ## Architecture
 - protto — main CLI entrypoint

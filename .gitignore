@@ -1,0 +1,7 @@
+# protto-generated backups and local overrides
+*.bak
+*.bak.*
+.DS_Store
+graphify-out/
+.claude/CLAUDE.md
+.opencode/AGENTS.md

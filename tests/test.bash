@@ -62,8 +62,13 @@ assert 'grep -q "protto" CLAUDE.md' 'CLAUDE.md contains project title'
 # Test 4: settings.json contains real commands
 assert 'grep -q "bash -n protto" .claude/settings.json' 'settings.json uses detected build command'
 assert 'grep -q "./tests/test.bash" .claude/settings.json' 'settings.json uses detected test command'
+assert 'python3 -m json.tool .claude/settings.json >/dev/null' 'settings.json is valid JSON'
 
-# Test 5: init --force overwrites and backs up
+# Test 5: AGENTS.md is adapted for OpenCode
+assert '! grep -q "\\.claude" AGENTS.md' 'AGENTS.md does not reference .claude'
+assert 'grep -q "\\.opencode" AGENTS.md' 'AGENTS.md references .opencode'
+
+# Test 6: init --force overwrites and backs up
 BEFORE=$(cat CLAUDE.md)
 "$PROG" init --force >/dev/null 2>&1
 set +e

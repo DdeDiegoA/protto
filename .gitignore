@@ -5,3 +5,6 @@
 graphify-out/
 .claude/CLAUDE.md
 .opencode/AGENTS.md
+CLAUDE.local.md
+AGENTS.local.md
+.env

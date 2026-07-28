@@ -13,7 +13,7 @@
 - tests/ — test suites
 - README.md — project overview
 - docs/ — documentation
-- .opencode/ / .opencode/ — agent configuration
+- .opencode/ — agent configuration
 
 ## Gotchas
 - `lib/detect.sh` uses POSIX tools (no jq/python). Keep it dependency-free.

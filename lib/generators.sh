@@ -57,6 +57,8 @@ EOF
 gen_agents_md() {
   # AGENTS.md mirrors CLAUDE.md but points to opencode paths instead of claude paths.
   perl -pe 's/CLAUDE\.md/AGENTS.md/g; s/\.claude/.opencode/g' CLAUDE.md > AGENTS.md
+  # Clean up the duplicated agent-config line so AGENTS.md reads naturally.
+  perl -i -pe 's/^- \.opencode\/ \/ \.opencode\/ — agent configuration$/- .opencode\/ — agent configuration/' AGENTS.md
 }
 
 gen_settings_json() {

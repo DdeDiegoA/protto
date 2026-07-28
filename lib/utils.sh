@@ -27,7 +27,7 @@ backup_if_exists() {
 }
 
 ensure_gitignore() {
-  [[ -f ".gitignore" ]] || return 0
+  [[ -f ".gitignore" ]] || touch .gitignore
   for pat in CLAUDE.local.md AGENTS.local.md .env; do
     grep -qxF "$pat" .gitignore || echo "$pat" >> .gitignore
   done

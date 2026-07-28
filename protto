@@ -42,13 +42,13 @@ cmd_init() {
   backup_if_exists AGENTS.md
 
   gen_dirs
+  ensure_gitignore
   gen_claude_md
   gen_agents_md
   gen_settings_json
   gen_docs
   gen_contextual_content
   gen_skills_md
-  ensure_gitignore
 
   # ponytail: print skill-aware next steps instead of generic tips
   echo "[protto] done."

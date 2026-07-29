@@ -29,8 +29,11 @@
 - See `docs/skills.md` for the list detected by protto.
 
 ## Docs
-- `docs/architecture.md` — high-level design
+- `docs/architecture/` — high-level design and structure
+- `docs/specs/` — feature specifications (speckit output)
+- `docs/design-system/` — UI/UX and visual direction
 - `docs/context.md` — current state and decisions
+- `docs/decisions.md` — architectural decision log
 - `docs/skills.md` — skills available to this project
 
 ## Post-Setup

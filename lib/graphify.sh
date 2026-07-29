@@ -49,7 +49,7 @@ import_graphify() {
     echo ""
     echo "## Knowledge Gaps"
     extract_section "$GRAPHIFY_REPORT" "Knowledge Gaps" "Suggested Questions" | sed '/^$/d' | head -30
-  } > docs/architecture.md
+  } > docs/architecture/index.md
 
   {
     echo "# Context"
@@ -62,7 +62,7 @@ import_graphify() {
     extract_section "$GRAPHIFY_REPORT" "Surprising Connections" "Knowledge Gaps" | sed '/^$/d' | head -30
   } > docs/context.md
 
-  echo "[protto] imported graphify report into docs/architecture.md and docs/context.md"
+  echo "[protto] imported graphify report into docs/architecture/index.md and docs/context.md"
 }
 
 # Generate a bootstrap script to run graphify on the project.

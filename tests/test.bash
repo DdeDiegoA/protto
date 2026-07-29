@@ -51,7 +51,9 @@ assert '[[ -d .opencode/skills ]]' '.opencode/skills created'
 assert '[[ -f .claude/settings.json ]]' '.claude/settings.json created'
 assert '[[ -f docs/skills.md ]]' 'docs/skills.md created'
 assert '[[ -f docs/decisions.md ]]' 'docs/decisions.md created'
-assert '[[ -f docs/architecture.md ]]' 'docs/architecture.md created'
+assert '[[ -f docs/architecture/index.md ]]' 'docs/architecture/index.md created'
+assert '[[ -f docs/specs/index.md ]]' 'docs/specs/index.md created'
+assert '[[ -f docs/design-system/index.md ]]' 'docs/design-system/index.md created'
 assert '[[ -f docs/context.md ]]' 'docs/context.md created'
 assert '[[ -f .claude/agents/reviewer.md ]]' '.claude/agents/reviewer.md created'
 assert '[[ -f .opencode/agents/reviewer.md ]]' '.opencode/agents/reviewer.md created'
@@ -67,11 +69,15 @@ assert '! "$PROG" init >/dev/null 2>&1' 'init refuses overwrite without --force'
 assert 'grep -q "bash -n protto && bash -n lib/" CLAUDE.md' 'CLAUDE.md contains detected build command'
 assert 'grep -q "./tests/test.bash" CLAUDE.md' 'CLAUDE.md contains detected test command'
 assert 'grep -q "protto" CLAUDE.md' 'CLAUDE.md contains project title'
-assert 'grep -q "## Decisions" docs/architecture.md' 'docs/architecture.md links to decisions'
+assert 'grep -q "## Decisions" docs/architecture/index.md' 'docs/architecture/index.md links to decisions'
 assert 'grep -q "## 2026" docs/decisions.md' 'docs/decisions.md contains a baseline decision'
 assert 'grep -q "Code Reviewer" .claude/agents/reviewer.md' 'reviewer agent created'
 assert 'grep -q "/review" .claude/commands/review.md' 'review command created'
 assert 'grep -q "Baseline Rules" .claude/rules/baseline.md' 'baseline rule created'
+assert 'grep -q "speckit" docs/specs/index.md' 'specs/index.md references speckit'
+assert 'grep -q "design-system" docs/specs/index.md' 'specs/index.md references design-system'
+assert 'grep -q "ui-ux pro max" docs/design-system/index.md' 'design-system/index.md references ui-ux'
+assert 'grep -q "docs/specs/" docs/design-system/index.md' 'design-system/index.md links to specs'
 
 # Test 4: settings.json contains real commands
 assert 'grep -q "bash -n protto" .claude/settings.json' 'settings.json uses detected build command'
@@ -129,8 +135,8 @@ Graph: 42 nodes, 55 edges, 7 communities
 - main -> lib/graphify.sh
 REPORT
 "$PROG" analyze >/dev/null 2>&1
-assert 'grep -q "42 nodes" docs/architecture.md' 'analyze imports graphify stats into docs/architecture.md'
-assert 'grep -q "missing tests" docs/architecture.md' 'analyze imports graphify gaps into docs/architecture.md'
+assert 'grep -q "42 nodes" docs/architecture/index.md' 'analyze imports graphify stats into docs/architecture/index.md'
+assert 'grep -q "missing tests" docs/architecture/index.md' 'analyze imports graphify gaps into docs/architecture/index.md'
 
 # Test 11: analyze imports surprising connections
 assert 'grep -q "main -> lib/graphify.sh" docs/context.md' 'analyze imports surprising connections into docs/context.md'

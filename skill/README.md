@@ -8,7 +8,9 @@ Skill wrapper for the `protto` CLI. It lets Claude Code and OpenCode run project
 
 - `CLAUDE.md` / `AGENTS.md`
 - `.claude/` and `.opencode/` config trees
-- `docs/architecture.md`, `docs/context.md`, `docs/decisions.md`, `docs/skills.md`
+- `docs/architecture/index.md`, `docs/context.md`, `docs/decisions.md`, `docs/skills.md`
+- `docs/specs/index.md` — speckit output lands here
+- `docs/design-system/index.md` — ui-ux pro max / Open Design output lands here
 - Hook-aware `settings.json`
 
 `/protto analyze` imports a `graphify` report (`graphify-out/GRAPH_REPORT.md`) or creates a bootstrap script so the agent can run `/graphify` itself.
@@ -54,15 +56,19 @@ protto analyze
 To verify the skill works after install:
 
 ```bash
-cd /tmpm -rf protto-test
+cd /tmp
+rm -rf protto-test
 mkdir protto-test
 cd protto-test
 protto init --force
 ls -la CLAUDE.md AGENTS.md .claude .opencode docs
+ls docs/architecture/ docs/specs/ docs/design-system/
 python3 -m json.tool .claude/settings.json
 python3 -m json.tool .opencode/settings.json
 grep -q ".opencode" AGENTS.md && echo "AGENTS.md cross-LLM OK"
 grep -q "## 2026-" docs/decisions.md && echo "decisions OK"
+grep -q "speckit" docs/specs/index.md && echo "specs OK"
+grep -q "ui-ux pro max" docs/design-system/index.md && echo "design-system OK"
 ```
 
 ## Files

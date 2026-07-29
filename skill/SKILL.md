@@ -69,9 +69,11 @@ After install, agents can invoke:
 | `.claude/agents/reviewer.md` / `.opencode/agents/reviewer.md` | Review subagent definition. |
 | `.claude/commands/review.md` / `.opencode/commands/review.md` | `/review` slash command. |
 | `.claude/rules/baseline.md` / `.opencode/rules/baseline.md` | Scoped baseline coding rules. |
-| `docs/architecture.md` | High-level structure, build/test, entrypoints. |
+| `docs/architecture/index.md` | High-level structure, build/test, entrypoints. |
 | `docs/context.md` | Current phase, latest decisions, next steps. |
 | `docs/decisions.md` | Decision log with an initial baseline entry. |
+| `docs/specs/index.md` | Placeholder for speckit feature specs and design-system reference. |
+| `docs/design-system/index.md` | Placeholder for ui-ux pro max / Open Design output. |
 | `docs/skills.md` | Inventory of skills detected in standard directories. |
 
 ## Design Principles
@@ -89,7 +91,8 @@ After install, agents can invoke:
 - [ ] Generated `settings.json` is valid JSON and contains detected build/test commands.
 - [ ] `AGENTS.md` references `.opencode`, not `.claude`.
 - [ ] `docs/decisions.md` contains a baseline decision entry.
-- [ ] `docs/architecture.md` links to `docs/decisions.md` and `docs/context.md`.
+- [ ] `docs/architecture/index.md` links to `docs/decisions.md` and `docs/context.md`.
+- [ ] `docs/specs/index.md` and `docs/design-system/index.md` exist with placeholder content.
 - [ ] Running `./tests/test.bash` in the protto repo passes.
 
 ## See Also

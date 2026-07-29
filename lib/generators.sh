@@ -4,7 +4,7 @@
 gen_dirs() {
   mkdir -p .claude/agents .claude/skills .claude/rules .claude/commands
   mkdir -p .opencode/agents .opencode/skills .opencode/rules .opencode/commands
-  mkdir -p docs
+  mkdir -p docs/architecture docs/specs docs/design-system
 }
 
 gen_claude_md() {
@@ -42,8 +42,11 @@ $(detect_architecture)
 - See \`docs/skills.md\` for the list detected by protto.
 
 ## Docs
-- \`docs/architecture.md\` — high-level design
+- \`docs/architecture/\` — high-level design and structure
+- \`docs/specs/\` — feature specifications (speckit output)
+- \`docs/design-system/\` — UI/UX and visual direction
 - \`docs/context.md\` — current state and decisions
+- \`docs/decisions.md\` — architectural decision log
 - \`docs/skills.md\` — skills available to this project
 
 ## Post-Setup
@@ -123,12 +126,6 @@ gen_docs() {
   fi
 
   # Only create stubs if the files don't exist yet.
-  [[ -f docs/architecture.md ]] || cat > docs/architecture.md <<EOF
-# Architecture
-> Start with one paragraph. Link to deeper files instead of copying.
-
-$ctx
-EOF
   [[ -f docs/context.md ]] || cat > docs/context.md <<EOF
 # Context
 > Current phase, latest decisions, and next steps. Keep it short.
